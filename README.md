@@ -20,4 +20,4 @@ img标签增加webp 属性 控制是否使用webp模式
 	$("img").lazyload({   
 		threshold : 200,  
 	    effect: "fadeIn"  
-  });
+	});
