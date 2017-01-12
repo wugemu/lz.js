@@ -106,26 +106,27 @@
 
             /* When appear is triggered load original image. */
             $self.one("appear", function() {
+            	
+            	//lang --- 修改img类型
+                var  iswebp=$self.attr('webp');
+                if(iswebp=="true"){
+                	if(isCanWebp){
+                    	//支持webp类型
+                		var original = $self.attr("data-" + settings.data_attribute);
+                    	 original=original.replace(/.jpg/i, ".webp");
+                         original= original.replace(/.jpeg/i, ".webp");
+                         $self.attr("data-" + settings.data_attribute,original);
+                    }
+                }
+              //lang ---结束修改
+                
                 if (!this.loaded) {
                     if (settings.appear) {
                         var elements_left = elements.length;
                         settings.appear.call(self, elements_left, settings);
                     }
-                    $("<img />")
-                        .bind("load", function() {
+                    $("<img />").bind("load", function() {
                             var original = $self.attr("data-" + settings.data_attribute);
-                            
-                          //lang --- 修改img类型
-                            var  classname=$self.attr('webp');
-                            if(classname){
-                            	if(isCanWebp){
-                                	//支持webp类型
-                                	 original=original.replace(/.jpg/i, ".webp");
-                                     original= original.replace(/.jpeg/i, ".webp");
-                                }
-                            }
-                          //lang ---结束修改
-                            
                             $self.hide();
                             if ($self.is("img")) {
                                 $self.attr("src", original);
@@ -148,6 +149,7 @@
                             }
                         })
                         .attr("src", $self.attr("data-" + settings.data_attribute));
+               
                 }
             });
 
